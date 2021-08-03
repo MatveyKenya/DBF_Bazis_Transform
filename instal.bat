@@ -1,1 +1,1 @@
-pyinstaller -F -w -i F:\Documents\Python_files\dbf_bazis\dbt.ico dbt.py
+pyinstaller -F -w -i D:\Python\dbf_bazis\dbt.ico D:\Python\dbf_bazis\dbt.py

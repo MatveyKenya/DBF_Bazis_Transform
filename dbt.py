@@ -3,7 +3,7 @@
 # программа по преобразованию файлов .dbf
 # из формата БАЗИС-8 и БАЗИС-2021 - в - БАЗИС-7
 #
-# Версия 1.1 от 28/07/2021 --- исправил под DBF Базис 2021
+# Версия 2.0 от 28/07/2021 --- исправил под DBF Базис 2021
 #---------------------------------------------------
 import dbf
 import os
@@ -25,16 +25,16 @@ class Main_Win(tk.Tk):
 
     def init_ui(self):
         self.geometry('400x170+300+300')
-        self.title('.DBF Bazis Transformator v1.0')
+        self.title('.DBF Bazis Transformator v2')
         self.resizable(0,0)
         if os.path.isfile('dbt.ico'): self.iconbitmap('dbt.ico')    
         btn_open = ttk.Button(self, text='Открыть папку с dbf', command=self.press_open_dir, width=40)
         btn_open.pack(pady=5)
-        lbl_path = ttk.Label(self, text='Путь до папки с файлам *.dbf (Базис v8)')
+        lbl_path = ttk.Label(self, text='Путь до папки с файлам *.dbf (Базис v8,21)')
         lbl_path.pack(pady=5)
         self.entry_path = ttk.Entry(self)
         self.entry_path.pack(fill=tk.X, padx=5, pady=5)        
-        btn_start_transform = ttk.Button(self, text='Преобразовать dbf из v8 в v7', command=self.start_transform, width=40)
+        btn_start_transform = ttk.Button(self, text='Преобразовать dbf из v8,21 в v7', command=self.start_transform, width=40)
         btn_start_transform.pack(padx=5, pady=5)
         menu = tk.Menu()
         menu.add_command(label='Справка для новичка ёу', command=self.spravka)
@@ -43,23 +43,23 @@ class Main_Win(tk.Tk):
         self.configure(menu=menu)
 
     def spravka(self):
-        text_spravka = 'Программа преобразует файлы *.dbf выгруженные из Базиса-8 '\
+        text_spravka = 'Программа преобразует файлы *.dbf выгруженные из Базиса-8,21 '\
                         +'в файлы *.dbf структуры выгрузки из под Базис-7 '\
                         +'для дальнейшей загрузки в программу OZMP\n\n'\
                         +'Порядок работы:\n'\
-                        +'1) выбрать папку с файлами dbf формата Базис-8\n'\
+                        +'1) выбрать папку с файлами dbf формата Базис8,21\n'\
                         +'   ---1. через кнопку "Открыть папку с dbf" '\
                         +'(Важно! сами файлы там не показываются! нужно просто выбрать саму папку)\n'\
                         +'   ---2. скопировать путь в окне открытой папки Windows '\
                         +'и вставить в строку программы\n'\
-                        +'2) нажать кнопку "Преобразовать dbf из v8 в v7"\n'\
+                        +'2) нажать кнопку "Преобразовать dbf из v8,21 в v7"\n'\
                         +'3) в случае успеха появится окно Отчета о преобразовании\n'\
-                        +'4) автоматически создается папка "_copy_dbf_bazis8" с копией старых файлов v.8'\
+                        +'4) автоматически создается папка "_copy_dbf_bazis8_21" с копией старых файлов v.8,21'\
                         +'\n\n ЗА РАБОТУ, ТОВАРИСЧ !!!'                        
         messagebox.showinfo('Инструкция по программе', text_spravka)
 
     def about(self):
-        messagebox.showinfo('DBT v1.0', 'версия 1.0 от 1.05.2020\n\
+        messagebox.showinfo('DBT v2.0', 'версия 2.0 от 28.07.2021\n\
             matveykenya@gmail.com')
     
     def press_open_dir(self):    
@@ -105,12 +105,12 @@ class Main_Win(tk.Tk):
                         self.create_dbf_b7(old_file_name, i[1]) #передаем имя файла и таблицу
                         text_info += i[0] +'\n'
                         count_of_files += 1
-                    text_info = 'Файлы dbf формата Базис8 в количестве '\
+                    text_info = 'Файлы dbf формата Базис8,21 в количестве '\
                                 + str(count_of_files) +' шт:\n\n' + text_info \
                                 + '\nуспешно преобразованы в формат Базис7'
                     messagebox.showinfo(self.dir_path, text_info)                    
 
-                else: messagebox.showerror("Ошибка", "В этой Папке нет .dbf от Базис8 или Базис2021")
+                else: messagebox.showerror("Ошибка", "В этой Папке нет .dbf от Базис v8 или v2021")
             else: messagebox.showerror("Ошибка", "В этой Папке нет ни одного Файла .dbf")                    
         else: messagebox.showerror("Ошибка", "Неверный Путь или Папка")
 
